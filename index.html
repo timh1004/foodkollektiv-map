@@ -93,7 +93,7 @@ input[type=search]:focus-visible,select:focus-visible{outline:2px solid var(--bo
 .empty{padding:26px 18px;color:var(--muted);font-size:12.5px}
 
 /* ---------- Chartfläche ---------- */
-.chart{position:relative;background:var(--sheet)}
+.chart{position:relative;min-width:0;min-height:0;background:var(--sheet)}
 #map{position:absolute;inset:0;background:var(--sheet)}
 .leaflet-container{background:#e8e6e0;font-family:var(--sans)}
 .pin{border-radius:50%;box-shadow:0 0 0 1.5px var(--sheet)}
@@ -386,5 +386,14 @@ document.getElementById('roll').addEventListener('keydown', e => {
   }
 });
 
-refit();
+/* Leaflet liest die Containergroesse beim Init. Als absolut positioniertes
+   Grid-Kind steht die zu dem Zeitpunkt noch nicht fest - ohne invalidateSize
+   rechnet fitBounds auf einer Flaeche von fast null und es erscheint nichts. */
+function boot(){
+  map.invalidateSize(true);
+  refit();
+}
+if (document.readyState === 'complete') requestAnimationFrame(boot);
+else window.addEventListener('load', () => requestAnimationFrame(boot));
+window.addEventListener('resize', () => map.invalidateSize());
 </script>
