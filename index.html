@@ -5,7 +5,7 @@
 :root{
   --ground:#eaeef0; --panel:#f6f8f9; --sheet:#dfe6ea;
   --ink:#14212b; --muted:#5d7183; --line:#cfd8de; --line-soft:#dde4e8;
-  --fk:#c2410c; --az:#0f766e; --c3:#1d4ed8; --c4:#a21caf; --both:#6d28d9; --closed:#94a3b8; --alarm:#a3341a;
+  --fk:#c2410c; --az:#0f766e; --c3:#1d4ed8; --c4:#db2777; --both:#6d28d9; --closed:#94a3b8; --alarm:#a3341a;
   --grat:#b9c6ce;
   --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
   --mono:"IBM Plex Mono",ui-monospace,monospace;
@@ -15,14 +15,14 @@
   :root:not([data-theme="light"]){
     --ground:#0d1620; --panel:#131f2a; --sheet:#0a121a;
     --ink:#dbe6ed; --muted:#8ba0b1; --line:#25333f; --line-soft:#1c2833;
-    --fk:#f97b4a; --az:#4bbfb2; --c3:#7dabff; --c4:#e879f9; --both:#a98bf5; --closed:#5c6b78; --alarm:#f08a6a;
+    --fk:#f97b4a; --az:#4bbfb2; --c3:#7dabff; --c4:#fb8fc4; --both:#a98bf5; --closed:#5c6b78; --alarm:#f08a6a;
     --grat:#233240;
   }
 }
 :root[data-theme="dark"]{
   --ground:#0d1620; --panel:#131f2a; --sheet:#0a121a;
   --ink:#dbe6ed; --muted:#8ba0b1; --line:#25333f; --line-soft:#1c2833;
-  --fk:#f97b4a; --az:#4bbfb2; --c3:#7dabff; --c4:#e879f9; --both:#a98bf5; --closed:#5c6b78; --alarm:#f08a6a;
+  --fk:#f97b4a; --az:#4bbfb2; --c3:#7dabff; --c4:#fb8fc4; --both:#a98bf5; --closed:#5c6b78; --alarm:#f08a6a;
   --grat:#233240;
 }
 *{box-sizing:border-box}
@@ -174,7 +174,10 @@ const D = {"creators":{"andyzingler":{"slug":"andyzingler","name":"Andy Zingler"
 const V = D.venues, T = D.timeline, CR = D.creators, PER = D.per, TOT = D.totals;
 const SLUGS = Object.keys(CR);
 const PALETTE = ['var(--fk)','var(--az)','var(--c3)','var(--c4)'];
-const PINNED = {foodkollektiv:'var(--fk)', andyzingler:'var(--az)'};
+// Kanaele behalten ihre Farbe in der Reihenfolge, in der sie dazukamen -
+// sonst wandert bei jedem neuen Kanal die halbe Karte um
+const PINNED = {foodkollektiv:'var(--fk)', andyzingler:'var(--az)',
+                'randy-gamble':'var(--c3)', 'bruno-pecorino':'var(--c4)'};
 // die beiden ersten Kanaele behalten ihre Farbe, neue bekommen die naechste freie
 const HUE = {}; let free = PALETTE.filter(c => !Object.values(PINNED).includes(c));
 SLUGS.forEach(s => HUE[s] = PINNED[s] || free.shift() || 'var(--ink)');
